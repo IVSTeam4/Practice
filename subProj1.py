@@ -159,9 +159,14 @@ def LED_seq():
     both_off()
 
 if __name__ == '__main__':
-    thr_1 = Thread(target=dist_calc)
-    thr_2 = Thread(target=LED_seq)
-    thr_1.start()
-    thr_2.start()
-    while True:
-        time.sleep(1)
+    try:
+        while True:
+            thr_1 = Thread(target=dist_calc)
+            thr_2 = Thread(target=LED_seq)
+            thr_1.start()
+            thr_2.start()
+            time.sleep(1) 
+        pass
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        
